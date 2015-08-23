@@ -1,1 +1,5 @@
-{{days}}
+div.currentMonth {{nameOfMonth}}
+
+div.calendar.monthView
+    div(ng-repeat='i in getNumber(totalDays) track by $index')
+        <day-of-month date='{{yearMonth}}{{1+$index}}'></day-of-month>

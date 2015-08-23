@@ -6,3 +6,25 @@ body {
 a {
   color: #00B7FF;
 }
+
+.currentMonth {
+    font-size:16px;
+    color: darkblue;
+}
+
+.calendar.monthView > div {
+    float:left;
+    height: 80px;
+    width: 150px;
+    border: 1px solid #5d2891;
+    background-color: antiquewhite;
+}
+
+ul {
+    margin: 0;   
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none;
+}

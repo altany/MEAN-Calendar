@@ -4,8 +4,8 @@ var calendarApp = angular.module('calendarApp', [
     'ui.bootstrap',
 	'ngRoute',
 	'ngResource',
-	'calendarController'
-	//'todoFilters'
+	'calendarController',
+	'calendarFilters'
 ]);
 
 calendarApp.config(['$routeProvider', '$locationProvider',
@@ -19,12 +19,33 @@ calendarApp.config(['$routeProvider', '$locationProvider',
         templateUrl: '/partials/monthView',
         controller: 'monthCtrl'
       }).
-     /* when('/todo/:taskId', {
-        templateUrl: '/partials/taskView',
-        controller: 'TaskViewCtrl'
-      }).*/
-	 
+     when('/viewTask/:taskId', {
+        templateUrl: '/partials/viewTask',
+        controller: 'ViewTaskCtrl'
+      }).	 
       otherwise({
         redirectTo: '/'
       });
 }]);
+
+calendarApp.directive('dayOfMonth', function(){
+	return{
+		restrict: 'E',
+        scope: {
+          date: '@'
+        },
+		templateUrl: 'partials/day-of-month',
+        controller: 'dayCtrl'
+	}
+});
+
+calendarApp.directive('dayTaskList', function(){
+	return{
+		restrict: 'E',
+        scope: {
+          task: '='
+        },
+		templateUrl: 'partials/day-task-list'
+	}
+});
+
