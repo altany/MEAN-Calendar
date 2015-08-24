@@ -1,3 +1,35 @@
-a(href='/') Go Back to list
+a.btn.btn-info(ng-href='/') Go back to List
 br
 {{task}}
+form#viewTask(name='viewTask', ng-submit='todoSave(task)', novalidate)
+	.form-group
+		label(for='title') Title
+		input#title.form-control(type='text', ng-model='task.title', ng-required='true')
+	.form-group
+		label(for='description') Description
+		input#description.form-control(type='text', ng-model='task.description', ng-required='true')
+	.form-group
+		label Date
+		p.input-group
+			input.form-control(type='text', datepicker-popup='yyyy-MM-dd' ng-model='task.date' is-open='opened' close-text='Close')
+			span.input-group-btn
+				button.btn.btn-default(ng-click='open($event)')
+					i.glyphicon.glyphicon-calendar
+	.form-group
+		label(for='location') Location
+		input#location.form-control(type='text', ng-model='task.location')
+	.form-group
+		label Users
+		div(ng-repeat='user in task.users track by $index').input-group
+			input.user.form-control(type='text', ng-model='user', name='user[]')
+			span.input-group-btn
+				button.btn.btn-default
+					i.glyphicon.glyphicon-minus
+		div.input-group
+			input.user.form-control(type='text', ng-model='newUser', name='user[]')
+			span.input-group-btn
+				button.btn.btn-default
+					i.glyphicon.glyphicon-plus
+	input.btn.btn-success.center-block(type='submit', value='Save')
+	
+	

@@ -34,10 +34,21 @@ calendarController.controller('dayCtrl', function($scope, $http, $filter, $locat
 });
 
 calendarController.controller('ViewTaskCtrl', function($scope, $http, $routeParams, $location) {
+	
+	$scope.newUser = '';
+	
     $http.get('/tasks/id/' + $routeParams.taskId).
     success(function(data, status, headers, config) {
 		$scope.task = data;
     });
+	
+	// For the datepicker
+	$scope.open = function($event) {
+	 
+		$event.preventDefault();
+		$event.stopPropagation();
+		$scope.opened = true;
+	 };
 });
 
 calendarFilters.filter('num', function() {
