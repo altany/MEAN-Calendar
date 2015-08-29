@@ -35,6 +35,11 @@ calendarController.controller('dayCtrl', function($scope, $http, $filter, $locat
 
 calendarController.controller('ViewTaskCtrl', function($scope, $http, $routeParams, $location) {
 	
+    /*function toTimestamp(strDate){
+        var datum = Date.parse(strDate);
+        return datum/1000;
+    }*/
+    
 	$scope.newUser = '';
 	
     $http.get('/tasks/id/' + $routeParams.taskId).
@@ -43,11 +48,11 @@ calendarController.controller('ViewTaskCtrl', function($scope, $http, $routePara
     });
 	
 	// For the datepicker
-	$scope.open = function($event) {
-	 
+	$scope.open = function($event, el) {
 		$event.preventDefault();
 		$event.stopPropagation();
-		$scope.opened = true;
+		$scope.opened = [];
+		$scope.opened[el] = true;
 	 };
 });
 

@@ -2,6 +2,9 @@
  
 var calendarApp = angular.module('calendarApp', [
     'ui.bootstrap',
+	'ui.bootstrap.datepicker',
+	'ui.bootstrap.timepicker',
+	'ui.bootstrap.datetimepicker',
 	'ngRoute',
 	'ngResource',
 	'calendarController',

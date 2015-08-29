@@ -11,10 +11,17 @@ form#viewTask(name='viewTask', ng-submit='todoSave(task)', novalidate)
 	.form-group
 		label Date
 		p.input-group
-			input.form-control(type='text', datepicker-popup='yyyy-MM-dd' ng-model='task.date' is-open='opened' close-text='Close')
+			// , datepicker-popup='yyyy-MM-dd'
+			input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateStart' is-open='opened.start' close-text='Close')
 			span.input-group-btn
-				button.btn.btn-default(ng-click='open($event)')
+				button.btn.btn-default(ng-click='open($event, "start")')
 					i.glyphicon.glyphicon-calendar
+		p.input-group
+			input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateEnd' is-open='opened.end' close-text='Close')
+			span.input-group-btn
+				button.btn.btn-default(ng-click='open($event, "end")')
+					i.glyphicon.glyphicon-calendar
+		
 	.form-group
 		label(for='location') Location
 		input#location.form-control(type='text', ng-model='task.location')
