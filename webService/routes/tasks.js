@@ -16,12 +16,17 @@ router.get('/all', function(req, res) {
  */
 router.get('/date/:date', function(req, res) {
     var db = req.db;
-	db.collection('taskCollection').find({ date: req.params.date }).toArray( function (err, items) {
+	var dStart = new Date(req.params.date);
+	var dEnd = new Date(req.params.date)
+	dEnd = dEnd.setHours(24,59,59,999);
+	
+	dStart = new Date(dStart).toISOString().slice(0, 19).replace('T', ' ');
+	dEnd = new Date(dEnd).toISOString().slice(0, 19).replace('T', ' ');
+	
+	db.collection('taskCollection').find({$or: [{$and: [ { dateStart: { $gt: dStart } }, { dateStart: { $lt: dEnd } } ]}, {$and: [ { dateEnd: { $gt: dStart } }, { dateEnd: { $lt: dEnd } } ]}, {$and: [ { dateStart: { $lt: dStart } }, { dateEnd: { $gt: dEnd } } ]}]}).toArray( function (err, items) {
         res.json(items);
     });
 });
-// db.collection.find( { field: { $gt: value1, $lt: value2 } } );
-
 
 /*
  * GET /tasks/id/:id
