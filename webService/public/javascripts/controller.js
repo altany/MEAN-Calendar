@@ -14,11 +14,19 @@ calendarController.controller('monthCtrl', function($scope, $http, $routeParams,
 	}
 	
     $scope.getNumber = function(num) {
-        return new Array(num);   
+		if (num<0) num=0;
+        return new Array(num);
     }
     
+	
 	$scope.currentMonth = $routeParams.month;
 	$scope.currentYear = $routeParams.year;
+	
+	$scope.firstDay = new Date($scope.currentYear, $scope.currentMonth - 1, 1).getDay();
+	$scope.firstDay =($scope.firstDay==0)?7:$scope.firstDay;
+	$scope.remainingDays = 7 - (new Date($scope.currentYear, $scope.currentMonth, 0).getDay());
+	$scope.remainingDays = ($scope.remainingDays>6)?0:$scope.remainingDays;
+	
     var daysInMonth =  new Date($routeParams.year, $routeParams.month, 0).getDate();
     $scope.totalDays = parseInt(daysInMonth, 10);
     $scope.yearMonth = $routeParams.year + '-' + $scope.twoDigit($routeParams.month) + '-';
