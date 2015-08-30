@@ -24,6 +24,10 @@ calendarApp.config(['$routeProvider', '$locationProvider',
         templateUrl: '/partials/monthView',
         controller: 'monthCtrl'
       }).
+	 when('/viewTask/new/:date', {
+        templateUrl: '/partials/viewTask',
+        controller: 'ViewTaskCtrl'
+      }).
      when('/viewTask/:taskId', {
         templateUrl: '/partials/viewTask',
         controller: 'ViewTaskCtrl'
@@ -33,16 +37,26 @@ calendarApp.config(['$routeProvider', '$locationProvider',
       });
 }]);
 
-calendarApp.directive('dayOfMonth', function(){
+calendarApp.directive('dayOfMonth', ['$window', function($window){
 	return{
 		restrict: 'E',
         scope: {
           date: '@'
         },
 		templateUrl: '/partials/day-of-month',
-        controller: 'dayCtrl'
+        controller: 'dayCtrl',
+		link: function (scope, element) {
+			element.parent().on('click', function(event) {
+				if (event.target.tagName != 'A' && event.target.tagName != 'LI') {
+				
+					$window.location.href = '/viewTask/new/' + scope.date;
+				}
+				
+
+			});
+		}
 	}
-});
+}]);
 
 calendarApp.directive('dayTaskList', function(){
 	return{

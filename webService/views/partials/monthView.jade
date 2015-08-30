@@ -1,10 +1,6 @@
 h2
 	span.label.label-info {{months[currentMonth-1]}}
-div.calendar.monthView
-	div(ng-repeat='i in getNumber(firstDay-1) track by $index').prevNextMonth
-	div(ng-repeat='i in getNumber(totalDays) track by $index')
-		<day-of-month date='{{yearMonth}}{{twoDigit(1+$index)}}' day='{{$index%7}}'></day-of-month>
-	div(ng-repeat='i in getNumber(remainingDays) track by $index').prevNextMonth
+	
 nav
 	ul.pager
 		li
@@ -15,3 +11,8 @@ nav
 			a(href='/month/{{(currentMonth==12)?((currentYear | num) | num)+1:currentYear}}/{{currentMonth%12 + 1}}')
 				span(aria-hidden="true")
 					{{months[(currentMonth)%12]}} &rarr;
+div.calendar.monthView
+	div(ng-repeat='i in getNumber(firstDay-1) track by $index').prevNextMonth
+	div(ng-repeat='i in getNumber(totalDays) track by $index')
+		<day-of-month date='{{yearMonth}}{{twoDigit(1+$index)}}'></day-of-month>
+	div(ng-repeat='i in getNumber(remainingDays) track by $index').prevNextMonth
