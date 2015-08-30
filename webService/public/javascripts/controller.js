@@ -4,9 +4,10 @@ var calendarController = angular.module('calendarController', []);
 var calendarFilters = angular.module('calendarFilters', []);
 
 
-calendarController.controller('monthCtrl', function($scope, $http, $filter, $location) {
+calendarController.controller('monthCtrl', function($scope, $http, $routeParams, $filter, $location) {
 	
-    var now = new Date();
+	$scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
     
 	$scope.twoDigit = function(num) {
 		return ('0' + num).slice(-2);
@@ -16,11 +17,11 @@ calendarController.controller('monthCtrl', function($scope, $http, $filter, $loc
         return new Array(num);   
     }
     
-    var daysInMonth =  new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+	$scope.currentMonth = $routeParams.month;
+	$scope.currentYear = $routeParams.year;
+    var daysInMonth =  new Date($routeParams.year, $routeParams.month, 0).getDate();
     $scope.totalDays = parseInt(daysInMonth, 10);
-    $scope.nameOfMonth = now.toLocaleString('en-us', { month: 'long' });
-    //$scope.date = now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate();
-    $scope.yearMonth = now.getFullYear() + '-' + $scope.twoDigit(1+now.getMonth()) + '-';
+    $scope.yearMonth = $routeParams.year + '-' + $scope.twoDigit($routeParams.month) + '-';
 	
 });
 

@@ -7,7 +7,7 @@ form#viewTask(name='viewTask', ng-submit='todoSave(task)', novalidate)
 		input#title.form-control(type='text', ng-model='task.title', ng-required='true')
 	.form-group
 		label(for='description') Description
-		input#description.form-control(type='text', ng-model='task.description', ng-required='true')
+		textarea#description.form-control(ng-model='task.description', ng-required='true')
 	.form-group
 		label Date
 		p.input-group

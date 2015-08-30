@@ -12,6 +12,9 @@ a {
     color: darkblue;
 }
 
+.calendar {
+	overflow:hidden;
+}
 .calendar.monthView > div {
     float:left;
     height: 80px;
