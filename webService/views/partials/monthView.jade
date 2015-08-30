@@ -2,10 +2,14 @@ div.currentMonth {{months[currentMonth-1]}}
 
 div.calendar.monthView
 	div(ng-repeat='i in getNumber(totalDays) track by $index')
-		<day-of-month date='{{yearMonth}}{{twoDigit(1+$index)}}'></day-of-month>
+		<day-of-month date='{{yearMonth}}{{twoDigit(1+$index)}}' day='{{$index%7}}'></day-of-month>
 nav
 	ul.pager
 		li
-			a(href='/month/{{currentYear}}/{{currentMonth-1}}') {{months[currentMonth-2]}}
+			a(href='/month/{{currentYear}}/{{currentMonth-1}}')
+				span(aria-hidden="true")
+					&larr; {{months[currentMonth-2]}}
 		li
-			a(href='/month/{{currentYear}}/{{(currentMonth | num)+1}}') {{months[currentMonth]}}
+			a(href='/month/{{currentYear}}/{{(currentMonth | num)+1}}')
+				span(aria-hidden="true")
+					{{months[currentMonth]}} &rarr;

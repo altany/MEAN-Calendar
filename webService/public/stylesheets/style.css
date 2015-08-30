@@ -18,7 +18,7 @@ a {
 .calendar.monthView > div {
     float:left;
     height: 80px;
-    width: 150px;
+    width: 14.28%;
     border: 1px solid #5d2891;
     background-color: antiquewhite;
 }
