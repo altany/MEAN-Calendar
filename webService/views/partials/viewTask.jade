@@ -1,23 +1,24 @@
 a.btn.btn-info(ng-href='/') Go back to List
 br
 {{task}}
-form#viewTask(name='viewTask', ng-submit='todoSave(task)', novalidate)
+div {{task.dateStart}}
+form#viewTask(name='viewTask', ng-submit='todoSave(viewTask)', novalidate)
 	.form-group
 		label(for='title') Title
 		input#title.form-control(type='text', ng-model='task.title', ng-required='true')
 	.form-group
 		label(for='description') Description
-		textarea#description.form-control(ng-model='task.description', ng-required='true')
+		textarea#description.form-control(ng-model='task.description')
 	.form-group
 		label Date
 		p.input-group
 			// , datepicker-popup='yyyy-MM-dd'
-			input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateStart' is-open='opened.start' close-text='Close')
+			input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateStart', is-open='opened.start', timepicker-options='timeOptions', close-text='Close')
 			span.input-group-btn
 				button.btn.btn-default(ng-click='open($event, "start")')
 					i.glyphicon.glyphicon-calendar
 		p.input-group
-			input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateEnd' is-open='opened.end' close-text='Close')
+			input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateEnd', is-open='opened.end', timepicker-options='timeOptions', close-text='Close')
 			span.input-group-btn
 				button.btn.btn-default(ng-click='open($event, "end")')
 					i.glyphicon.glyphicon-calendar

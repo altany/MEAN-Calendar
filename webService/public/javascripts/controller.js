@@ -43,18 +43,37 @@ calendarController.controller('dayCtrl', function($scope, $http, $filter, $locat
 });
 
 calendarController.controller('ViewTaskCtrl', function($scope, $http, $routeParams, $location) {
-	
-    /*function toTimestamp(strDate){
-        var datum = Date.parse(strDate);
-        return datum/1000;
-    }*/
-    
-	$scope.newUser = '';
+
+    $scope.newUser = '';
 	
     $http.get('/tasks/id/' + $routeParams.taskId).
     success(function(data, status, headers, config) {
 		$scope.task = data;
     });
+	
+	$scope.todoSave = function (form) {
+		console.log(form, $scope.task);
+		//if (form.$valid){
+			if (typeof $routeParams.date !=='undefined') {
+				//console.log('new');
+				/*$http.post('/tasks/new/', $scope.task).
+				success(function(data, status, headers, config) {
+					$location.path('/');
+				});*/
+			}
+			else {
+				//console.log('update');
+				/*$http.put('/tasks/', $scope.task).
+					success(function(data, status, headers, config) {
+					$location.path('/');
+				});*/
+			}		
+		//}
+    };
+	
+	$scope.timeOptions = {
+		showMeridian: false
+	};
 	
 	// For the datepicker
 	$scope.open = function($event, el) {
