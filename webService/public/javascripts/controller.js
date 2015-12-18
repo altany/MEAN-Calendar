@@ -14,11 +14,19 @@ calendarController.controller('monthCtrl', function($scope, $http, $routeParams,
 	}
 	
     $scope.getNumber = function(num) {
-        return new Array(num);   
+		if (num<0) num=0;
+        return new Array(num);
     }
     
+	
 	$scope.currentMonth = $routeParams.month;
 	$scope.currentYear = $routeParams.year;
+	
+	$scope.firstDay = new Date($scope.currentYear, $scope.currentMonth - 1, 1).getDay();
+	$scope.firstDay =($scope.firstDay==0)?7:$scope.firstDay;
+	$scope.remainingDays = 7 - (new Date($scope.currentYear, $scope.currentMonth, 0).getDay());
+	$scope.remainingDays = ($scope.remainingDays>6)?0:$scope.remainingDays;
+	
     var daysInMonth =  new Date($routeParams.year, $routeParams.month, 0).getDate();
     $scope.totalDays = parseInt(daysInMonth, 10);
     $scope.yearMonth = $routeParams.year + '-' + $scope.twoDigit($routeParams.month) + '-';
@@ -35,18 +43,37 @@ calendarController.controller('dayCtrl', function($scope, $http, $filter, $locat
 });
 
 calendarController.controller('ViewTaskCtrl', function($scope, $http, $routeParams, $location) {
-	
-    /*function toTimestamp(strDate){
-        var datum = Date.parse(strDate);
-        return datum/1000;
-    }*/
-    
-	$scope.newUser = '';
+
+    $scope.newUser = '';
 	
     $http.get('/tasks/id/' + $routeParams.taskId).
     success(function(data, status, headers, config) {
 		$scope.task = data;
     });
+	
+	$scope.todoSave = function (form) {
+		console.log(form, $scope.task);
+		//if (form.$valid){
+			if (typeof $routeParams.date !=='undefined') {
+				//console.log('new');
+				/*$http.post('/tasks/new/', $scope.task).
+				success(function(data, status, headers, config) {
+					$location.path('/');
+				});*/
+			}
+			else {
+				//console.log('update');
+				/*$http.put('/tasks/', $scope.task).
+					success(function(data, status, headers, config) {
+					$location.path('/');
+				});*/
+			}		
+		//}
+    };
+	
+	$scope.timeOptions = {
+		showMeridian: false
+	};
 	
 	// For the datepicker
 	$scope.open = function($event, el) {

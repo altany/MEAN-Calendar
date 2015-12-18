@@ -1,10 +1,20 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	padding: 50px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	background-color: #FAF7F7;
 }
 
 a {
-  color: #00B7FF;
+  color: #CC0052;
+}
+
+ul {
+    margin: 0;   
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none;
 }
 
 .currentMonth {
@@ -18,16 +28,36 @@ a {
 .calendar.monthView > div {
     float:left;
     height: 80px;
-    width: 150px;
-    border: 1px solid #5d2891;
-    background-color: antiquewhite;
+    width: 14.28%;
+    border: 1px solid #E0B2E0;
+    background-color: white;
 }
 
-ul {
-    margin: 0;   
-    padding: 0;
+.calendar.monthView div.prevNextMonth {
+	opacity: 0.4;
 }
 
-ul li {
-    list-style-type: none;
+.calendar.monthView > div .day {
+	color: #B5476C;
+	display: inline-block;
+	vertical-align: top;
+	padding: 5px 10px;
+	border-right: 1px solid #F5EAEB;
+	border-bottom: 1px solid #F5EAEB;
+	background-color: #FDF5FA;
 }
+
+.calendar.monthView > div ul {
+	display : inline-block;
+	margin-left: 5px;
+	width: calc(100% - 45px);
+}
+
+.calendar.monthView > div ul li {
+	border: 1px solid #FFE0E5;
+	margin-bottom: 1px;
+	padding: 2px;
+	background-color: #FFF0F0;
+	
+}
+
