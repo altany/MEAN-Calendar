@@ -2,7 +2,7 @@
   "name": "MEAN Calendar",
   "description": "A calendar using Mongo DB, Express, AngularJS and Node.js",
   "repository": "https://github.com/altany/MEAN-Calendar",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "logo": "https://raw.githubusercontent.com/altany/MEAN-Calendar/master/webService/public/images/Calendar-icon-handwrite.png",
   "keywords": ["node", "express", "angular", "mongo", "calendar"],
   "image": "webService/public/images/Calendar-icon-handwrite.png"
 }
