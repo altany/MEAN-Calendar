@@ -23,6 +23,13 @@ router.get('/date/:date', function(req, res) {
 	dStart = new Date(dStart).toISOString().slice(0, 19).replace('T', ' ');
 	dEnd = new Date(dEnd).toISOString().slice(0, 19).replace('T', ' ');
 	
+    /* Get list for today by querying tasks that: 
+        start after today's start AND start before today's end
+        OR
+        end after today's start AND end before today's END
+        OR
+        start before today's start and end after today's end
+    */
 	db.collection('taskCollection').find({$or: [{$and: [ { dateStart: { $gt: dStart } }, { dateStart: { $lt: dEnd } } ]}, {$and: [ { dateEnd: { $gt: dStart } }, { dateEnd: { $lt: dEnd } } ]}, {$and: [ { dateStart: { $lt: dStart } }, { dateEnd: { $gt: dEnd } } ]}]}).toArray( function (err, items) {
         res.json(items);
     });
