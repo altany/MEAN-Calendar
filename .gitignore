@@ -27,6 +27,6 @@ build/Release
 node_modules
 
 #mongoDB
-/webService/mongoDB/*
-/webService/node_modules/*
-/webService/data/*
+/mongoDB/*
+/node_modules/*
+/data/*

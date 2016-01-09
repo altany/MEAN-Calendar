@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 //Database
 var mongo = require('mongoskin');
-var db = mongo.db('mongodb://localhost:27017/webService', {native_parser:true}); //webService is the database name
+var db = mongo.db('mongodb://app_user:a12345@ds037005.mongolab.com:37005/heroku_847lbw7q', {native_parser:true});
 
 var routes = require('./routes/index');
 var tasks = require('./routes/tasks');
@@ -17,6 +17,8 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.set('port', (process.env.PORT || 5000));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
