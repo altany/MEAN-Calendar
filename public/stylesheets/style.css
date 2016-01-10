@@ -37,6 +37,11 @@ ul li {
 	opacity: 0.4;
 }
 
+.calendar.monthView .currentMonth{
+	cursor: pointer;
+    cursor: hand;
+}
+
 .calendar.monthView > div .day {
 	color: #B5476C;
 	display: inline-block;
@@ -58,6 +63,5 @@ ul li {
 	margin-bottom: 1px;
 	padding: 2px;
 	background-color: #FFF0F0;
-	
 }
 

@@ -2,5 +2,5 @@ div.day {{day}}
 
 // here goes the list of tasks for the day
 ul
-    li(ng-repeat='task in dayTasks')
+    li(ng-repeat='task in dayTasks', title='Click to edit event')
         <day-task-list task='task'></day-task-list>
