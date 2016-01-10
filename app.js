@@ -21,7 +21,7 @@ app.set('view engine', 'jade');
 app.set('port', (process.env.PORT || 5000));
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname + '/public/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -69,5 +69,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
+app.listen(process.env.PORT || 5000);
 
 module.exports = app;

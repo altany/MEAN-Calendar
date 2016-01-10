@@ -23,6 +23,13 @@ router.get('/date/:date', function(req, res) {
 	dStart = new Date(dStart).toISOString().slice(0, 19).replace('T', ' ');
 	dEnd = new Date(dEnd).toISOString().slice(0, 19).replace('T', ' ');
 	
+    /* Get list for today by querying tasks that: 
+        start after today's start AND start before today's end
+        OR
+        end after today's start AND end before today's END
+        OR
+        start before today's start and end after today's end
+    */
 	db.collection('taskCollection').find({$or: [{$and: [ { dateStart: { $gt: dStart } }, { dateStart: { $lt: dEnd } } ]}, {$and: [ { dateEnd: { $gt: dStart } }, { dateEnd: { $lt: dEnd } } ]}, {$and: [ { dateStart: { $lt: dStart } }, { dateEnd: { $gt: dEnd } } ]}]}).toArray( function (err, items) {
         res.json(items);
     });
@@ -44,8 +51,7 @@ router.get('/id/:id', function(req, res) {
 router.post('/new', function(req, res) {
 	if(!req.body) { return res.send(400); } // 6
     var db = req.db;
-	req.body.done = false;
-    db.collection('taskCollection').insert(req.body, function(err, result){
+	db.collection('taskCollection').insert(req.body, function(err, result){
         res.send(
             (err === null) ? { msg: '' } : { msg: err }
         );
@@ -66,7 +72,7 @@ router.delete('/:id', function(req, res) {
 /*
  * PUT to /tasks/:id.
  */
-router.put('/', function(req, res) {
+router.put('/:id', function(req, res) {
 	
     var db = req.db;
 	if(!req.body) { return res.send(400); } 
@@ -82,13 +88,21 @@ router.put('/', function(req, res) {
 		 if (req.body.deadline) {
 			data.deadline = req.body.deadline;
 		}
+        if (req.body.description) {
+			data.description = req.body.description;
+		}
+		if (req.body.dateStart) {
+			data.dateStart = req.body.dateStart;
+		}
+		if (req.body.dateEnd) {
+			data.dateEnd = req.body.dateEnd;
+		}
 		if (req.body.location) {
 			data.location = req.body.location;
 		}
-		
-		data.done = req.body.done;
+         console.log(req.params.id, data);
 
-		db.collection('taskCollection').updateById(req.body._id, 
+		db.collection('taskCollection').updateById(req.params.id, 
 		{$set: data},
 		function(errUpd) { 
 			if(errUpd) {
