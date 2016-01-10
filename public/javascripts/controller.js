@@ -52,36 +52,33 @@ calendarController.controller('ViewTaskCtrl', function($scope, $http, $routePara
     });
 	
 	$scope.todoSave = function (form) {
-		console.log(form, $scope.task);
-		//if (form.$valid){
+		if (form.$valid){
 			if (typeof $routeParams.date !=='undefined') {
-				//console.log('new');
-				/*$http.post('/tasks/new/', $scope.task).
+				$http.post('/tasks/new/', $scope.task).
 				success(function(data, status, headers, config) {
 					$location.path('/');
-				});*/
+				});
 			}
 			else {
-				//console.log('update');
-				/*$http.put('/tasks/', $scope.task).
+				$http.put('/tasks/'+$routeParams.taskId, $scope.task).
 					success(function(data, status, headers, config) {
 					$location.path('/');
-				});*/
+				});
 			}		
-		//}
+		}
     };
 	
-	$scope.timeOptions = {
-		showMeridian: false
-	};
-	
-	// For the datepicker
-	$scope.open = function($event, el) {
-		$event.preventDefault();
-		$event.stopPropagation();
-		$scope.opened = [];
-		$scope.opened[el] = true;
-	 };
+//	$scope.timeOptions = {
+//		showMeridian: false
+//	};
+//	
+//	// For the datepicker
+//	$scope.open = function($event, el) {
+//		$event.preventDefault();
+//		$event.stopPropagation();
+//		$scope.opened = [];
+//		$scope.opened[el] = true;
+//	 };
 });
 
 calendarFilters.filter('num', function() {

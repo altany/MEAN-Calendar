@@ -1,7 +1,9 @@
-a.btn.btn-info(ng-href='/') Go back to List
-br
-{{task}}
-div {{task.dateStart}}
+p
+	a.btn.btn-info(ng-href='/') Go back to List
+
+p Raw Data: {{task}}
+
+
 form#viewTask(name='viewTask', ng-submit='todoSave(viewTask)', novalidate)
 	.form-group
 		label(for='title') Title
@@ -13,31 +15,35 @@ form#viewTask(name='viewTask', ng-submit='todoSave(viewTask)', novalidate)
 		label Date
 		p.input-group
 			// , datepicker-popup='yyyy-MM-dd'
-			input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateStart', is-open='opened.start', timepicker-options='timeOptions', close-text='Close')
-			span.input-group-btn
-				button.btn.btn-default(ng-click='open($event, "start")')
-					i.glyphicon.glyphicon-calendar
+			//input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateStart', is-open='opened.start', timepicker-options='timeOptions', close-text='Close')
+			//span.input-group-btn
+			//	button.btn.btn-default(ng-click='open($event, "start")')
+			//		i.glyphicon.glyphicon-calendar
+			input.form-control(type='text', ng-model='task.dateStart')
 		p.input-group
-			input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateEnd', is-open='opened.end', timepicker-options='timeOptions', close-text='Close')
-			span.input-group-btn
-				button.btn.btn-default(ng-click='open($event, "end")')
-					i.glyphicon.glyphicon-calendar
+			//input.form-control(type='text', datetime-picker='yyyy-MM-dd HH:mm', ng-model='task.dateEnd', is-open='opened.end', timepicker-options='timeOptions', close-text='Close')
+			//span.input-group-btn
+			//	button.btn.btn-default(ng-click='open($event, "end")')
+			//		i.glyphicon.glyphicon-calendar
+			input.form-control(type='text', ng-model='task.dateEnd')
 		
 	.form-group
 		label(for='location') Location
 		input#location.form-control(type='text', ng-model='task.location')
-	.form-group
-		label Users
-		div(ng-repeat='user in task.users track by $index').input-group
-			input.user.form-control(type='text', ng-model='user', name='user[]')
-			span.input-group-btn
-				button.btn.btn-default
-					i.glyphicon.glyphicon-minus
-		div.input-group
-			input.user.form-control(type='text', ng-model='newUser', name='user[]')
-			span.input-group-btn
-				button.btn.btn-default
-					i.glyphicon.glyphicon-plus
 	input.btn.btn-success.center-block(type='submit', value='Save')
+	//.form-group
+	//	label Users
+	//	div(ng-repeat='user in task.users track by $index').input-group
+	//		input.user.form-control(type='text', ng-model='user', name='user[]')
+	//		span.input-group-btn
+//				button.btn.btn-default
+//					i.glyphicon.glyphicon-minus
+//		div.input-group
+//			input.user.form-control(type='text', ng-model='newUser', name='user[]')
+	//		span.input-group-btn
+		//		button.btn.btn-default
+		//			i.glyphicon.glyphicon-plus
+
+	
 	
 	

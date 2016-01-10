@@ -51,8 +51,7 @@ router.get('/id/:id', function(req, res) {
 router.post('/new', function(req, res) {
 	if(!req.body) { return res.send(400); } // 6
     var db = req.db;
-	req.body.done = false;
-    db.collection('taskCollection').insert(req.body, function(err, result){
+	db.collection('taskCollection').insert(req.body, function(err, result){
         res.send(
             (err === null) ? { msg: '' } : { msg: err }
         );
@@ -73,7 +72,7 @@ router.delete('/:id', function(req, res) {
 /*
  * PUT to /tasks/:id.
  */
-router.put('/', function(req, res) {
+router.put('/:id', function(req, res) {
 	
     var db = req.db;
 	if(!req.body) { return res.send(400); } 
@@ -89,13 +88,21 @@ router.put('/', function(req, res) {
 		 if (req.body.deadline) {
 			data.deadline = req.body.deadline;
 		}
+        if (req.body.description) {
+			data.description = req.body.description;
+		}
+		if (req.body.dateStart) {
+			data.dateStart = req.body.dateStart;
+		}
+		if (req.body.dateEnd) {
+			data.dateEnd = req.body.dateEnd;
+		}
 		if (req.body.location) {
 			data.location = req.body.location;
 		}
-		
-		data.done = req.body.done;
+         console.log(req.params.id, data);
 
-		db.collection('taskCollection').updateById(req.body._id, 
+		db.collection('taskCollection').updateById(req.params.id, 
 		{$set: data},
 		function(errUpd) { 
 			if(errUpd) {
