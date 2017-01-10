@@ -1,7 +1,7 @@
 # MEAN-Calendar (work in progress...)
 A simple restful Calendar app with AngularJS, Node.js, Express and MongoDB
 
-###Demo
+### Demo
 To see and play with this app, follow:
 [https://mean-calendar.herokuapp.com](https://mean-calendar.herokuapp.com).
 
