@@ -30,16 +30,35 @@ calendarController.controller('monthCtrl', function($scope, $http, $routeParams,
     var daysInMonth =  new Date($routeParams.year, $routeParams.month, 0).getDate();
     $scope.totalDays = parseInt(daysInMonth, 10);
     $scope.yearMonth = $routeParams.year + '-' + $scope.twoDigit($routeParams.month) + '-';
+    
+    $http.get('http://rest-service.guides.spring.io/greeting').
+        then(function(response) {
+            $scope.greeting = response.data;
+            //var element = document.getElementById("day-" + $scope.day)
+            //element.style["background-color"] = "blue";
+            var i;
+            for (i = 1; i <= $scope.totalDays; i++) { 
+                   var element = document.getElementById("day-" + i)
+                element.style["background-color"] = "green";
+            }
+        });
 	
 });
 
 calendarController.controller('dayCtrl', function($scope, $http, $filter, $location) {
     $scope.day = $scope.date.split('-').slice(-1)[0].replace(/\b0(?=\d)/g, ''); // Get the day from the date and remove leading 0s
     
-    $http.get('/tasks/date/' + $scope.date).
+    /*$http.get('/tasks/date/' + $scope.date).
     success(function(data, status, headers, config) {
 		$scope.dayTasks = data;
-    });
+    });*/
+    /*$http.get('http://rest-service.guides.spring.io/greeting').
+        then(function(response) {
+            $scope.greeting = response.data;
+            var element = document.getElementById("day-" + $scope.day)
+            element.style["background-color"] = "green";
+    });*/
+    
 });
 
 calendarController.controller('ViewTaskCtrl', function($scope, $http, $routeParams, $location) {

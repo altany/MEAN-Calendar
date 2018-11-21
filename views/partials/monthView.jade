@@ -13,6 +13,6 @@ nav
 					{{months[(currentMonth)%12]}} &rarr;
 div.calendar.monthView
 	div(ng-repeat='i in getNumber(firstDay-1) track by $index').prevNextMonth
-	div(ng-repeat='i in getNumber(totalDays) track by $index', title='Click to add new event').currentMonth
+	div(ng-repeat='i in getNumber(totalDays) track by $index', title='Click to go to the build', id="day-{{$index+1}}").currentMonth
 		<day-of-month date='{{yearMonth}}{{twoDigit(1+$index)}}'></day-of-month>
 	div(ng-repeat='i in getNumber(remainingDays) track by $index').prevNextMonth

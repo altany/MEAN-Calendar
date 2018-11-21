@@ -49,7 +49,9 @@ calendarApp.directive('dayOfMonth', ['$window', function($window){
 			element.parent().on('click', function(event) {
 				if (event.target.tagName != 'A' && event.target.tagName != 'LI') {
 				
-					$window.location.href = '/viewTask/new/' + scope.date;
+					//$window.location.href = '/viewTask/new/' + scope.date;
+					//Add the bvt url here
+					$window.location.href ="http://www.google.com";
 				}
 				
 
