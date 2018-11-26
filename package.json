@@ -11,9 +11,12 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "jade": "~1.11.0",
+    "loadash": "^1.0.0",
+    "mongodb": "2.0",
+    "mongoskin": "*",
     "morgan": "~1.6.1",
+    "request": "^2.74.0",
     "serve-favicon": "~2.3.0",
-	"mongodb": "2.0",
-    "mongoskin": "*"
+    "underscore": "^1.9.1"
   }
 }

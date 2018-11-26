@@ -48,8 +48,12 @@ calendarApp.directive('dayOfMonth', ['$window', function($window){
 		link: function (scope, element) {
 			element.parent().on('click', function(event) {
 				if (event.target.tagName != 'A' && event.target.tagName != 'LI') {
-				
-					$window.location.href = '/viewTask/new/' + scope.date;
+					if(monthData && monthData[scope.date] && monthData[scope.date][0]){
+						$window.location.href = monthData[scope.date][0].jenkins_build_link;
+					}
+					else {
+						alert("No Build Available");
+					}
 				}
 				
 

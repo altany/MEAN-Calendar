@@ -5,12 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//Database
+// Database
 var mongo = require('mongoskin');
 var db = mongo.db('mongodb://app_user:a12345@ds037005.mongolab.com:37005/heroku_847lbw7q', {native_parser:true});
 
 var routes = require('./routes/index');
-var tasks = require('./routes/tasks');
+var build = require('./routes/build');
 
 var app = express();
 
@@ -34,7 +34,7 @@ app.use(function(req,res,next){
     next();
 })
 
-app.use('/tasks', tasks);
+app.use('/build', build);
 app.use('/', routes);
 
 

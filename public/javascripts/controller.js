@@ -2,7 +2,7 @@
 
 var calendarController = angular.module('calendarController', []);
 var calendarFilters = angular.module('calendarFilters', []);
-
+var monthData;
 
 calendarController.controller('monthCtrl', function($scope, $http, $routeParams, $filter, $location) {
 	
@@ -18,7 +18,7 @@ calendarController.controller('monthCtrl', function($scope, $http, $routeParams,
         return new Array(num);
     }
     
-	
+	//Will be used to send in rest api
 	$scope.currentMonth = $routeParams.month;
 	$scope.currentYear = $routeParams.year;
 	
@@ -30,16 +30,77 @@ calendarController.controller('monthCtrl', function($scope, $http, $routeParams,
     var daysInMonth =  new Date($routeParams.year, $routeParams.month, 0).getDate();
     $scope.totalDays = parseInt(daysInMonth, 10);
     $scope.yearMonth = $routeParams.year + '-' + $scope.twoDigit($routeParams.month) + '-';
+    
+    $http.get('http://localhost:3000/build/all?month=11&year=2018').
+        then(function(response) {
+            /*$scope.greeting = response.data;
+            monthData= {
+            	"2018-11-19":
+	            [
+	            	{
+            			"build_no": 310166,
+            			"status": "Success",
+		            	"report_link": "http://byoos-nfs.rch.kstart.ibm.com/katalon-reports/310164",
+		            	"jenkins_build_link": "https://orpheus-jenkins.swg-devops.com:8443/job/cam-bvt-pipeline/310164"
+            		}
+		        ],
+		        "2018-11-20":
+	            [
+		            {
+		            	"build_no": 310165,
+		            	"status": "Unstable",
+		            	"report_link": "http://byoos-nfs.rch.kstart.ibm.com/katalon-reports/310165",
+		            	"jenkins_build_link": "https://orpheus-jenkins.swg-devops.com:8443/job/cam-bvt-pipeline/310165"
+		            },
+		            {	
+		            	"build_no": 310166,
+		            	"status": "Failed",
+		            	"report_link": "http://byoos-nfs.rch.kstart.ibm.com/katalon-reports/310166",
+		            	"jenkins_build_link": "https://orpheus-jenkins.swg-devops.com:8443/job/cam-bvt-pipeline/310166"
+		            }
+		        ]
+            };*/
+            monthData = response.data;
+            var i;
+            for (i = 1; i <= $scope.totalDays; i++) { 
+                var element = document.getElementById("day-" + i)
+                var key = $scope.currentYear + "-" + $scope.currentMonth + "-" + i;
+                var buildArr = monthData[key];
+                if(buildArr && buildArr.length>0){
+                	 var j;
+                	 for(j=0; j<buildArr.length; j++){
+                		 //Todo: 1. create capsules for each build  && 2. Beautify the page
+                		 
+                		 if(buildArr[j].status === "Success") {
+                			 element.style["background-color"] = "green";
+                		 }
+                		 else if(buildArr[j].status === "Unstable") {
+                			 element.style["background-color"] = "yellow";
+                		 }
+                		 else {
+                			 element.style["background-color"] = "red";
+                		 }
+                	 }
+                }
+            }
+        });
 	
 });
 
 calendarController.controller('dayCtrl', function($scope, $http, $filter, $location) {
     $scope.day = $scope.date.split('-').slice(-1)[0].replace(/\b0(?=\d)/g, ''); // Get the day from the date and remove leading 0s
     
-    $http.get('/tasks/date/' + $scope.date).
+    /*$http.get('/tasks/date/' + $scope.date).
     success(function(data, status, headers, config) {
 		$scope.dayTasks = data;
-    });
+    });*/
+    /*$http.get('http://rest-service.guides.spring.io/greeting').
+        then(function(response) {
+            $scope.greeting = response.data;
+            var element = document.getElementById("day-" + $scope.day)
+            element.style["background-color"] = "green";
+    });*/
+    
 });
 
 calendarController.controller('ViewTaskCtrl', function($scope, $http, $routeParams, $location) {
